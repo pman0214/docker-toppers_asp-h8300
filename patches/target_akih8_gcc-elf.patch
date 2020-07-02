@@ -1,0 +1,98 @@
+Index: asp/arch/h8300h_gcc/Makefile.core
+===================================================================
+--- asp.orig/arch/h8300h_gcc/Makefile.core
++++ asp/arch/h8300h_gcc/Makefile.core
+@@ -14,7 +14,7 @@
+ #
+ #  GNU開発環境のターゲットアーキテクチャの定義
+ #
+-GCC_TARGET = h8300-hms
++GCC_TARGET = h8300-elf
+ 
+ #
+ #  コンパイルオプション
+Index: asp/target/akih8_3048f_gcc/Makefile.target
+===================================================================
+--- asp.orig/target/akih8_3048f_gcc/Makefile.target
++++ asp/target/akih8_3048f_gcc/Makefile.target
+@@ -70,7 +70,7 @@ endif
+ #
+ #  GNU開発環境のターゲットアーキテクチャの定義
+ #
+-GCC_TARGET = h8300-hms
++GCC_TARGET = h8300-elf
+ 
+ #
+ #  依存関係の定義
+Index: asp/target/akih8_3048f_gcc/debug.ld
+===================================================================
+--- asp.orig/target/akih8_3048f_gcc/debug.ld
++++ asp/target/akih8_3048f_gcc/debug.ld
+@@ -1,4 +1,4 @@
+-OUTPUT_FORMAT("coff-h8300")
++OUTPUT_FORMAT("elf32-h8300")
+ OUTPUT_ARCH(h8300h)
+ 
+ ENTRY("_start")
+Index: asp/target/akih8_3048f_gcc/release.ld
+===================================================================
+--- asp.orig/target/akih8_3048f_gcc/release.ld
++++ asp/target/akih8_3048f_gcc/release.ld
+@@ -1,4 +1,4 @@
+-OUTPUT_FORMAT("coff-h8300")
++OUTPUT_FORMAT("elf32-h8300")
+ OUTPUT_ARCH(h8300h)
+ 
+ STARTUP(start.o)
+Index: asp/target/akih8_3069f_gcc/Makefile.target
+===================================================================
+--- asp.orig/target/akih8_3069f_gcc/Makefile.target
++++ asp/target/akih8_3069f_gcc/Makefile.target
+@@ -60,7 +60,7 @@ endif
+ #
+ #  GNU開発環境のターゲットアーキテクチャの定義
+ #
+-GCC_TARGET = h8300-hms
++GCC_TARGET = h8300-elf
+ 
+ #
+ #  依存関係の定義
+Index: asp/target/akih8_3069f_gcc/debug.ld
+===================================================================
+--- asp.orig/target/akih8_3069f_gcc/debug.ld
++++ asp/target/akih8_3069f_gcc/debug.ld
+@@ -41,7 +41,7 @@
+  *  $Id: debug.ld 2328 2012-03-16 06:14:19Z mit-kimai $
+  */
+ 
+-OUTPUT_FORMAT("coff-h8300")
++OUTPUT_FORMAT("elf32-h8300")
+ OUTPUT_ARCH(h8300h)
+ 
+ STARTUP(start.o)
+Index: asp/target/akih8_3069f_gcc/release.ld
+===================================================================
+--- asp.orig/target/akih8_3069f_gcc/release.ld
++++ asp/target/akih8_3069f_gcc/release.ld
+@@ -39,7 +39,7 @@
+  *  接的または間接的に生じたいかなる損害に関しても，その責任を負わない．
+  */
+ 
+-OUTPUT_FORMAT("coff-h8300")
++OUTPUT_FORMAT("elf32-h8300")
+ OUTPUT_ARCH(h8300h)
+ 
+ STARTUP(start.o)
+Index: asp/target/akih8_3069f_gcc/release_inmem.ld
+===================================================================
+--- asp.orig/target/akih8_3069f_gcc/release_inmem.ld
++++ asp/target/akih8_3069f_gcc/release_inmem.ld
+@@ -41,7 +41,7 @@
+  *  $Id: release_inmem.ld 2328 2012-03-16 06:14:19Z mit-kimai $
+  */
+ 
+-OUTPUT_FORMAT("coff-h8300")
++OUTPUT_FORMAT("elf32-h8300")
+ OUTPUT_ARCH(h8300h)
+ 
+ STARTUP(start.o)

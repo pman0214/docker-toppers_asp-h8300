@@ -1,0 +1,26 @@
+Index: asp/cfg/toppers/cpp.hpp
+===================================================================
+--- asp.orig/cfg/toppers/cpp.hpp
++++ asp/cfg/toppers/cpp.hpp
+@@ -43,7 +43,7 @@
+ 
+ #include "toppers/codeset.hpp"
+ #include "toppers/diagnostics.hpp"
+-#include <boost/utility.hpp>
++#include <boost/next_prior.hpp>
+ #include <boost/filesystem/path.hpp>
+ #include <boost/filesystem/operations.hpp>
+ #include <boost/filesystem/exception.hpp>
+Index: asp/cfg/toppers/text.hpp
+===================================================================
+--- asp.orig/cfg/toppers/text.hpp
++++ asp/cfg/toppers/text.hpp
+@@ -53,7 +53,7 @@
+ #include <numeric>
+ #include "toppers/text_line.hpp"
+ #include "toppers/misc.hpp"
+-#include <boost/utility.hpp>
++#include <boost/next_prior.hpp>
+ #include <boost/iterator/iterator_facade.hpp>
+ #include <boost/format.hpp>
+ 
