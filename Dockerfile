@@ -12,6 +12,7 @@ RUN set -x && \
 	wget https://www.toppers.jp/download.cgi/asp_arch_h8300h_gcc-1.7.0.tar.gz -O - | tar zx && \
 	cd /asp && \
 	patch -p1 < /tmp/patches/target_akih8_gcc-elf.patch && \
+	patch -p1 < /tmp/patches/target_akih8_dram_debug.patch && \
 	echo '### build configurator' && \
 	wget https://www.toppers.jp/download.cgi/cfg-1.9.6.tar.gz -O - | tar zx && \
 	patch -p1 < /tmp/patches/cfg_boost-1.72.patch && \
