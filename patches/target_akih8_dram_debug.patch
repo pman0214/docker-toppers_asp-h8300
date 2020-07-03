@@ -1,0 +1,89 @@
+Index: asp/target/akih8_3069f_gcc/debug.ld
+===================================================================
+--- asp.orig/target/akih8_3069f_gcc/debug.ld
++++ asp/target/akih8_3069f_gcc/debug.ld
+@@ -47,18 +47,16 @@ OUTPUT_ARCH(h8300h)
+ STARTUP(start.o)
+ 
+ MEMORY {
+-	/* for mode 5: 0x000000 -> 0xffffff */
+-	vectors		: o = 0xffc000, l = 0x000100	/* for debug */
+-
+-	/* use 1M for .text and .rodata */
+-	ex_ram		: o = 0x400000, l = 0x100000
++        /* for mode 5: DRAM @ 0x400000 -> 0x600000 */
++        /* use 1M for .text and .rodata  */
++	/*    top 256 bytes are used for vectors */
++        rom (rwx)	: o = 0x400000, l = 0x0fff00
+ 
+ 	/* use 1M for .data and .bss  */
+-	ex_ram5		: o = 0x500000, l = 0x100000
++	ex_ram (rw)	: o = 0x500000, l = 0x100000
+ 
+-	/* use 15.5k for .stack  */
+-	/*  (in back of vectors) */
+-	in_ram		: o = 0xffc100, l = 0x003e20
++	/* use 16k for .stack  */
++	in_ram (rw)	: o = 0xffc000, l = 0x003f00
+ 
+ 	}
+ 
+@@ -67,16 +65,13 @@ PROVIDE(_software_init_hook = 0);
+ PROVIDE(_software_term_hook = 0);
+ SECTIONS {
+ 
+-	.vectors : {
+-		*(.vectors)
+-		} >vectors
+-
+ 	.text :
+ 	{
+ 		__text = . ;
++		KEEP(*(.vectors))
+ 		*(.text)
+ 		*(.gcc_exc)
+-	} >ex_ram
++	} >rom
+ 	_etext = .	;
+ 	PROVIDE (etext = .)	;
+ 	.tors : {
+@@ -86,13 +81,13 @@ SECTIONS {
+ 	  ___dtors = . ;
+ 	  *(.dtors)
+ 	  ___dtors_end = . ;
+-	} >ex_ram
++	} >rom
+ 
+ 	. = ALIGN(4);
+ 	.rodata : {
+ 		. = ALIGN(4);
+ 		*(.rodata)
+-	} >ex_ram
++	} >rom
+ 
+ 	. = ALIGN(4);
+ 	__idata_start = . ;
+@@ -100,7 +95,7 @@ SECTIONS {
+ 	{
+ 		__data_start = . ;
+ 		*(.data)
+-	} >ex_ram5
++	} >ex_ram
+ 	__idata_end = __idata_start + SIZEOF(.data);
+ 	_edata  =  . ;
+ 	PROVIDE (edata = .);
+@@ -111,7 +106,7 @@ SECTIONS {
+ 	{
+ 		*(.bss)
+ 		*(COMMON)
+-	} >ex_ram5
++	} >ex_ram
+ 	_end = .		;
+ 	PROVIDE (end = .)	;
+ 
+@@ -123,3 +118,5 @@ SECTIONS {
+ 	.debug_aranges  0 : { *(.debug_aranges) }
+ 	.debug_pubnames 0 : { *(.debug_pubnames) }
+ }
++
++ENTRY (__kernel_start)
